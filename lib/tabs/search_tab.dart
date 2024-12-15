@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movies_app/search/custom_search_delegate.dart';
 
 class SearchTab extends StatefulWidget {
   @override
@@ -11,13 +12,14 @@ class _SearchTabState extends State<SearchTab> {
 
   List<Map<String, String>> movies = [];
   bool isLoading = false;
-  ////////////
+
   void _searchMovies(String query) async {
     setState(() {
       isLoading = true;
     });
 
     await Future.delayed(Duration(seconds: 2));
+
     setState(() {
       isLoading = false;
     });
@@ -26,89 +28,104 @@ class _SearchTabState extends State<SearchTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                hintText: 'Search',
-                hintStyle: TextStyle(color: Colors.grey),
-                prefixIcon: Icon(Icons.search, color: Colors.white),
-                filled: true,
-                fillColor: Colors.grey.withOpacity(0.3),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(32.0),
-                  borderSide: BorderSide(color: Colors.grey, width: 1),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(32.0),
-                  borderSide: BorderSide(color: Colors.grey, width: 1),
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(32.0),
-                  borderSide: BorderSide.none,
-                ),
-              ),
-              style: TextStyle(color: Colors.white),
-              onChanged: _searchMovies,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        actions: [
+          IconButton(
+            onPressed: () =>
+                showSearch(context: context, delegate: CustomSearchDelegade()),
+            icon: const Icon(
+              Icons.search,
+              size: 32,
+              color: Colors.white,
             ),
-          ),
-          Expanded(
-            child: isLoading
-                ? Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : movies.isEmpty
-                    ? Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/images/Icon material-local-movies.png',
-                              width: 100,
-                              height: 100,
-                              color: Colors.grey,
-                            ),
-                            SizedBox(height: 16),
-                            Text(
-                              'No movies found',
-                              style:
-                                  TextStyle(fontSize: 12, color: Colors.grey),
-                            ),
-                          ],
-                        ),
-                      )
-                    : ListView.builder(
-                        itemCount: movies.length,
-                        itemBuilder: (context, index) {
-                          final movie = movies[index];
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16.0, vertical: 8.0),
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: 80,
-                                  height: 120,
-                                  color: Colors.grey,
-                                ),
-                                SizedBox(width: 16),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
           ),
         ],
       ),
+      //   body: Column(
+      //     children: [
+      //       Padding(
+      //         padding: const EdgeInsets.all(16.0),
+      //         child: TextField(
+      //           controller: _searchController,
+      //           decoration: InputDecoration(
+      //             hintText: 'Search',
+      //             hintStyle: TextStyle(color: Colors.grey),
+      //             prefixIcon: Icon(Icons.search, color: Colors.white),
+      //             filled: true,
+      //             fillColor: Colors.grey.withOpacity(0.3),
+      //             enabledBorder: OutlineInputBorder(
+      //               borderRadius: BorderRadius.circular(32.0),
+      //               borderSide: BorderSide(color: Colors.grey, width: 1),
+      //             ),
+      //             focusedBorder: OutlineInputBorder(
+      //               borderRadius: BorderRadius.circular(32.0),
+      //               borderSide: BorderSide(color: Colors.grey, width: 1),
+      //             ),
+      //             border: OutlineInputBorder(
+      //               borderRadius: BorderRadius.circular(32.0),
+      //               borderSide: BorderSide.none,
+      //             ),
+      //           ),
+      //           style: TextStyle(color: Colors.white),
+      //           onChanged: _searchMovies,
+      //         ),
+      //       ),
+      //       Expanded(
+      //         child: isLoading
+      //             ? Center(
+      //                 child: CircularProgressIndicator(),
+      //               )
+      //             : movies.isEmpty
+      //                 ? Center(
+      //                     child: Column(
+      //                       mainAxisAlignment: MainAxisAlignment.center,
+      //                       children: [
+      //                         Image.asset(
+      //                           'assets/images/Icon material-local-movies.png',
+      //                           width: 100,
+      //                           height: 100,
+      //                           color: Colors.grey,
+      //                         ),
+      //                         SizedBox(height: 16),
+      //                         Text(
+      //                           'No movies found',
+      //                           style:
+      //                               TextStyle(fontSize: 12, color: Colors.grey),
+      //                         ),
+      //                       ],
+      //                     ),
+      //                   )
+      //                 : ListView.builder(
+      //                     itemCount: movies.length,
+      //                     itemBuilder: (context, index) {
+      //                       final movie = movies[index];
+      //                       return Padding(
+      //                         padding: const EdgeInsets.symmetric(
+      //                             horizontal: 16.0, vertical: 8.0),
+      //                         child: Row(
+      //                           children: [
+      //                             Container(
+      //                               width: 80,
+      //                               height: 120,
+      //                               color: Colors.grey,
+      //                             ),
+      //                             SizedBox(width: 16),
+      //                             Expanded(
+      //                               child: Column(
+      //                                 crossAxisAlignment:
+      //                                     CrossAxisAlignment.start,
+      //                               ),
+      //                             ),
+      //                           ],
+      //                         ),
+      //                       );
+      //                     },
+      //                   ),
+      //       ),
+      //     ],
+      //   ),
+
       backgroundColor: Colors.black,
     );
   }
