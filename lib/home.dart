@@ -1,6 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_app/tabs/search_tab.dart';
+import 'package:movies_app/tabs/bookmark_tab.dart';
+import 'package:movies_app/tabs/browse_tab.dart';
+import 'package:movies_app/tabs/home_tab.dart';
+import 'package:movies_app/search/view/screens/search_tab.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = "/home";
@@ -12,7 +14,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
   List<Widget> tabs = [
+    HomeTab(),
     SearchTab(),
+    BrowseTab(),
+    BookmarkTab(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -29,12 +34,12 @@ class _HomeScreenState extends State<HomeScreen> {
           currentIndex = index;
           setState(() {});
         },
-        items: [
+        items: const [
           BottomNavigationBarItem(
               icon: ImageIcon(AssetImage('assets/images/home.png')),
               label: 'HOME'),
           BottomNavigationBarItem(
-              icon: ImageIcon(AssetImage('assets/images/search-2.png')),
+              icon: ImageIcon(AssetImage('assets/images/search.png')),
               label: 'SEARCH'),
           BottomNavigationBarItem(
               icon: ImageIcon(AssetImage('assets/images/movie.png')),
