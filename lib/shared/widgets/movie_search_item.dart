@@ -26,6 +26,7 @@ class MovieSearchItem extends StatelessWidget {
                 'assets/images/placeholder_image.jpg',
             height: 100.h,
             width: 160.w,
+            fit: BoxFit.cover,
           ),
         ),
         SizedBox(

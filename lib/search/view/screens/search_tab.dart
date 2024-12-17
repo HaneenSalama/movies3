@@ -3,6 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/app_theme.dart';
 import 'package:movies_app/search/view/widgets/search_text_field.dart';
 import 'package:movies_app/search/view_model/search_view_model.dart';
+import 'package:movies_app/shared/utils/validator.dart';
+import 'package:movies_app/shared/widgets/error_indicator.dart';
+import 'package:movies_app/shared/widgets/loading_indicator.dart';
+import 'package:movies_app/shared/widgets/movie_search_item.dart';
 import 'package:provider/provider.dart';
 
 class SearchTab extends StatefulWidget {
@@ -73,7 +77,7 @@ class _SearchTabState extends State<SearchTab> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
-                          'assets/images/no_movies_found.png',
+                          'assets/images/fd56e79a492733f92951955aa0ae532f.png',
                           height: 87.h,
                           width: 78.h,
                         ),
